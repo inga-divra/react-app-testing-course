@@ -26,7 +26,7 @@ This is a boilerplate Vite project, with Typescript, TailwindCSS, and all of the
 
 For the most part we will focus on tests and only navigate to the actual browser from time to time, so dev server can be stopped at any time unlike the test runner which will constantly run in the background to watch for changes and re-run the tests.
 
-Also in the root you will find README.md file with the course outline, more detailed explanations of the course content,links to additional resources, code examples which you can use as a reference, and other helpful information. So make sure to check it out.
+Also in the root you will find README.md file with the course outline, more detailed exp6lanations of the course content,links to additional resources, code examples which you can use as a reference, and other helpful information. So make sure to check it out.
 
 ## Explore our First Test
 
