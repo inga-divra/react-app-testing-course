@@ -1,9 +1,8 @@
-const Sandbox = () => {
+function Sandbox() {
   return (
     <div>
-      {/*  <h1>Test passed with heading</h1> */}
-      Sandbox
+      <h1>React Testing Library Examples</h1>
     </div>
   );
-};
+}
 export default Sandbox;
