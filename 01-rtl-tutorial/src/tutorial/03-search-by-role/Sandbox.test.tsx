@@ -30,4 +30,11 @@ describe('03-search-by-role', () => {
     expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument();
   });
+
+  test('error button is not initially visible', () => {
+    render(<Sandbox />);
+    expect(
+      screen.queryByRole('button', { name: 'Error' })
+    ).not.toBeInTheDocument();
+  });
 });
