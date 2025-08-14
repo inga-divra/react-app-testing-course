@@ -10,4 +10,10 @@ describe('04-user-interactions', () => {
     const { container } = render(<Sandbox />);
     logRoles(container);
   });
+  test('should increment and decrement count using fireEvent', () => {
+    render(<Sandbox />);
+    const increaseButton = screen.getByRole('button', { name: /increase/i });
+    const decreaseButton = screen.getByRole('button', { name: /decrease/i });
+    expect(screen.getByText(/count: 0/i)).toBeInTheDocument();
+  });
 });
