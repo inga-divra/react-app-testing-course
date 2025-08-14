@@ -42,5 +42,10 @@ describe('04-user-interactions', () => {
       screen.queryByRole('button', { name: 'like button' })
     ).not.toBeInTheDocument();
     await user.click(unlikeButton);
+    const likeButton = screen.getByRole('button', { name: 'like button' });
+    expect(likeButton).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'unlike button' })
+    ).not.toBeInTheDocument();
   });
 });
