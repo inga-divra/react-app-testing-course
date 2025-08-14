@@ -52,7 +52,7 @@ const Sandbox = () => {
           </button>
         )}
       </div>
-      <div>
+      {/* <div>
         <button
           onClick={handleToggleLike}
           className='block mx-auto text-2xl text-red-500 mt-16'
@@ -60,7 +60,7 @@ const Sandbox = () => {
         >
           {isLiked ? <FaHeart /> : <FaRegHeart />}
         </button>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -32,4 +32,15 @@ describe('04-user-interactions', () => {
     await user.click(decreaseButton);
     expect(screen.getByText(/count: 0/i)).toBeInTheDocument();
   });
+  test('toggles between unlike and like buttons when clicked', async () => {
+    render(<Sandbox />);
+    const user = userEvent.setup();
+
+    const unlikeButton = screen.getByRole('button', { name: 'unlike button' });
+    expect(unlikeButton).toBeInTheDocument();
+    expect(
+      screen.queryByRole('button', { name: 'like button' })
+    ).not.toBeInTheDocument();
+    await user.click(unlikeButton);
+  });
 });
