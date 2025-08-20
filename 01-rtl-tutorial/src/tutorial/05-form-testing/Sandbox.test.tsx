@@ -53,4 +53,15 @@ describe('05-form-testing', () => {
     await user.type(confirmPasswordInputElement, 'secret');
     expect(confirmPasswordInputElement).toHaveValue('secret');
   });
+
+  test('should show email error if email is invalid', async () => {
+    const { emailInputElement, submitButton } = getFormElements();
+
+    expect(screen.queryByText(/invalid email/i)).not.toBeInTheDocument();
+
+    await user.type(emailInputElement, 'invalid');
+    await user.click(submitButton);
+
+    expect(screen.getByText(/invalid email/i)).toBeInTheDocument();
+  });
 });
