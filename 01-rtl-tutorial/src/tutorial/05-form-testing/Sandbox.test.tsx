@@ -64,4 +64,21 @@ describe('05-form-testing', () => {
 
     expect(screen.getByText(/invalid email/i)).toBeInTheDocument();
   });
+
+  test('should show password error if password is less than 5 characters', async () => {
+    const { emailInputElement, passwordInputElement, submitButton } =
+      getFormElements();
+
+    expect(
+      screen.queryByText(/password must be at least 5 characters/i)
+    ).not.toBeInTheDocument();
+
+    await user.type(emailInputElement, 'test@test.com');
+    await user.type(passwordInputElement, 'abcd');
+    await user.click(submitButton);
+
+    expect(
+      screen.getByText(/password must be at least 5 characters/i)
+    ).toBeInTheDocument();
+  });
 });
