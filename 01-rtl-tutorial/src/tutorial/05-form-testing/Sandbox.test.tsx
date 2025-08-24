@@ -1,4 +1,4 @@
-import { render, screen, logRoles } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Sandbox from '../../tutorial/05-form-testing/Sandbox';
 import userEvent, { UserEvent } from '@testing-library/user-event';
 
@@ -80,5 +80,24 @@ describe('05-form-testing', () => {
     expect(
       screen.getByText(/password must be at least 5 characters/i)
     ).toBeInTheDocument();
+  });
+
+  test('should show error if passwords do not match', async () => {
+    const {
+      emailInputElement,
+      passwordInputElement,
+      confirmPasswordInputElement,
+      submitButton,
+    } = getFormElements();
+    expect(
+      screen.queryByText(/passwords do not match/i)
+    ).not.toBeInTheDocument();
+
+    await user.type(emailInputElement, 'test@test.com');
+    await user.type(passwordInputElement, 'secret');
+    await user.type(confirmPasswordInputElement, 'notsecret');
+    await user.click(submitButton);
+
+    expect(screen.getByText(/passwords do not match/i)).toBeInTheDocument();
   });
 });
