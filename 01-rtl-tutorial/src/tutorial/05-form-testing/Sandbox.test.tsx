@@ -100,4 +100,28 @@ describe('05-form-testing', () => {
 
     expect(screen.getByText(/passwords do not match/i)).toBeInTheDocument();
   });
+
+  test('valid inputs show no errors and clear fields', async () => {
+    const {
+      emailInputElement,
+      passwordInputElement,
+      confirmPasswordInputElement,
+      submitButton,
+    } = getFormElements();
+    await user.type(emailInputElement, 'test@test.com');
+    await user.type(passwordInputElement, 'secret');
+    await user.type(confirmPasswordInputElement, 'secret');
+    await user.click(submitButton);
+
+    expect(screen.queryByText(/invalid email/i)).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/password must be at least 5 characters/i)
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByText(/passwords do not match/i)
+    ).not.toBeInTheDocument();
+    expect(emailInputElement).toHaveValue('');
+    expect(passwordInputElement).toHaveValue('');
+    expect(confirmPasswordInputElement).toHaveValue('');
+  });
 });
