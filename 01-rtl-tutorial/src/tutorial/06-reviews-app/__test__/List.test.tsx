@@ -23,4 +23,9 @@ describe('List Component', () => {
       screen.getByRole('heading', { level: 2, name: /reviews/i })
     ).toBeInTheDocument();
   });
+
+  test('displays "No reviews yet" when reviews array is empty', () => {
+    render(<List reviews={[]} />);
+    expect(screen.getByText('No reviews yet')).toBeInTheDocument();
+  });
 });
