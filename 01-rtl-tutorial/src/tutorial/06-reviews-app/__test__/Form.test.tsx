@@ -52,4 +52,34 @@ describe('Review Form', () => {
     ).toBeInTheDocument();
     expect(mockOnSubmit).not.toHaveBeenCalled();
   });
+
+  test('submits form with valid data', async () => {
+    const mockOnSubmit = vi.fn();
+    const user = userEvent.setup();
+    render(<Form onSubmit={mockOnSubmit} />);
+
+    const { emailInput, ratingSelect, textArea, submitButton } =
+      getFormElements();
+
+    await user.type(emailInput, 'test@example.com');
+    await user.selectOptions(ratingSelect, '5');
+    await user.type(
+      textArea,
+      'This is a valid review text that is long enough'
+    );
+    await user.click(submitButton);
+
+    // We can validate the form submission because mockOnSubmit is a mock function (vi.fn())
+    // that keeps track of all calls made to it. This allows us to verify:
+    expect(mockOnSubmit).toHaveBeenCalledWith({
+      email: 'test@example.com',
+      rating: '5',
+      text: 'This is a valid review text that is long enough',
+    });
+
+    // Check if form is reset after submission
+    expect(emailInput).toHaveValue('');
+    expect(ratingSelect).toHaveValue('');
+    expect(textArea).toHaveValue('');
+  });
 });
