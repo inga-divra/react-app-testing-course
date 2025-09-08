@@ -30,4 +30,24 @@ describe('Review App', () => {
     expect(screen.getByText('Great product!')).toBeInTheDocument();
     expect(screen.getByText('⭐'.repeat(5))).toBeInTheDocument();
   });
+
+  test('alternative - adds a new review when form is submitted', async () => {
+    const user = userEvent.setup();
+    render(<Sandbox />);
+
+    const reviews = screen.queryAllByRole('article');
+    expect(reviews).toHaveLength(0);
+    // Get form elements
+    const { emailInput, ratingSelect, textArea, submitButton } =
+      getFormElements();
+
+    // Fill out and submit form
+    await user.type(emailInput, 'test@example.com');
+    await user.selectOptions(ratingSelect, '5');
+    await user.type(textArea, 'Great product!');
+    await user.click(submitButton);
+
+    // Verify one new review was added
+    expect(screen.getAllByRole('article')).toHaveLength(1);
+  });
 });
